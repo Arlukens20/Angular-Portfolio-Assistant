@@ -1,0 +1,16 @@
+{
+    "data": [
+      {
+        "Close": 299.6799926758,
+        "Date": 1662681600000,
+        "Dividends": 0,
+        "High": 299.8500061035,
+        "Low": 291.25,
+        "Open": 291.6700134277,
+        "Stock Splits": 0,
+        "Volume": 54338100
+      }
+    ],
+    "message": "Success",
+    "status": 200
+  }

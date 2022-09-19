@@ -1,0 +1,57 @@
+<div class = "container">
+    <h1>Stock Finder</h1>
+        <div>
+        <label for = "Ticker"> Ticker: </label>
+        <p><input type="text" id="tickerA" name="tickerB" #ticker></p>
+        <h1> {{model.Ticker}}</h1>
+        <button type="button" (click)="getData(ticker.value)">Search Data</button>
+        <button type="button" (click)="getPrice(ticker.value)">Search Price</button>
+        <button type="button" (click)="getPriceCustomDate(ticker.value,from.value,thru.value)">Search Price Custom</button>
+       </div>
+ </div>
+
+ <div>
+    <p><input type="date" id="from" name="from" #from></p>
+    <p><input type="date" id="thru" name="thru" #thru></p>
+ </div>
+
+
+ <div *ngIf = 'model.response'>
+    <h1>Response for Testing</h1>
+    <p>{{model.response}}</p>
+ </div>
+
+
+
+ <!-- Values to display if get Info is searched-->
+ <div *ngIf="model.longBusinessSummary">
+    <h1>Summary</h1>
+    <p>{{model.longBusinessSummary}}</p>
+    <h1>Website:</h1>
+    <p>{{model.website}}</p>
+</div>
+
+<div *ngIf="model.longBusinessSummary">
+    <h2>targetMedianPrice:</h2>
+    <p>{{model.targetMedianPrice}}</p>
+    <h2>targetMeanPrice:</h2>
+    <p>{{model.targetMeanPrice}}</p>
+    <h2>targetHighPrice:</h2>
+    <p>{{model.targetHighPrice}}</p>
+    <h2>targetLowPrice:</h2>
+    <p>{{model.targetLowPrice}}</p>
+</div>
+
+
+<!-- Values to display if getPrice is used-->
+
+<div *ngIf="model.low">
+    <h2>Volume:</h2>
+    <p>{{model.volume}}</p>
+    <h2>low:</h2>
+    <p>{{model.low}}</p>
+    <h2>high:</h2>
+    <p>{{model.high}}</p>
+</div>
+
+<!-- <app-line-chart></app-line-chart> -->

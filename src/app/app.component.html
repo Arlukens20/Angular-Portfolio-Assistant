@@ -1,0 +1,17 @@
+<h1>
+  {{title}}
+</h1>
+<!-- <div style="text-align: center;">
+  <app-page></app-page>
+ <app-line-chart></app-line-chart>
+</div> -->
+
+<!--This is the main page of the application.-->
+<ul class="nav navbar-nav">
+    <button (click)="goToIndex()">Index</button>
+    <button (click)="goToPage()">Page</button>
+    <button (click)="goToLine()">Line</button>
+    <button (click)="goToPortfolio()">portfolio</button>
+</ul>
+
+<router-outlet> </router-outlet>
