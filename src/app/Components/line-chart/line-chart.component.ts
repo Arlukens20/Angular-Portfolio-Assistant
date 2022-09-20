@@ -23,7 +23,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
-    this.createChart(this.labels,this.data);
+    // this.createChart(this.labels,this.data);
   }
 
   createChart(label:string[],data:string[]){  

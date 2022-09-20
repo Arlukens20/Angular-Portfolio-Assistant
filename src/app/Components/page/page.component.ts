@@ -5,6 +5,7 @@ import { StockServiceService } from '../../Services/stock-service.service';
 
 import { Subscriber, throwError} from  'rxjs';
 import { ChartServiceService } from 'src/app/Services/chart-service.service';
+import { ChartData } from 'src/app/Objects/chart-data';
 
 @Component({
   selector: 'app-page',
@@ -21,6 +22,7 @@ export class PageComponent implements OnInit {
 
   //Init model of stock here
   model = new Stock('','','','','','','','','','','');
+  chartModel = new ChartData([''],[''],['']);
 
   constructor(private stockService: StockServiceService,private chartService:ChartServiceService) {
   }
@@ -75,13 +77,24 @@ export class PageComponent implements OnInit {
         this.date.push(obj['data'][i]['Date'])
         this.close.push(obj['data'][i]['Close'])
         this.volume.push(obj['data'][i]['Volume'])
-        console.log(i)
         i++
       }while(obj['data'][i+1] != null)
 
-      console.log(this.date,this.close,this.volume)
+      this.chartModel.close = this.close;
+      this.chartModel.date = this.date;
+      this.chartModel.volume = this.volume;
 
+      console.log(this.date,this.close,this.volume)
     })
+  }
+
+  buildChart(){
+    this.chartService.createChart(this.date,this.close)
+    console.log("Create Chart")
+  }
+
+  clearChart(){
+    this.chartService.destroyChart();
   }
 
   async JsonParser(obj:Object){

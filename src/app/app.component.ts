@@ -23,9 +23,9 @@ export class AppComponent {
     this.router.navigate(['/', 'StockFinder']);
   }
 
-  goToLine() {
-    this.router.navigate(['/', 'line']);
-  }
+  // goToLine() {
+  //   this.router.navigate(['/', 'line']);
+  // }
 
   goToPortfolio() {
     this.router.navigate(['/', 'Portfolio']);

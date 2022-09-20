@@ -7,11 +7,12 @@
 </div> -->
 
 <!--This is the main page of the application.-->
-<ul class="nav navbar-nav">
+<div>
+  <ul class="nav navbar-nav button">
     <button (click)="goToIndex()">Index</button>
     <button (click)="goToPage()">Page</button>
-    <button (click)="goToLine()">Line</button>
+    <!-- <button (click)="goToLine()">Line</button> -->
     <button (click)="goToPortfolio()">portfolio</button>
-</ul>
-
+  </ul>
+</div>
 <router-outlet> </router-outlet>

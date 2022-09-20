@@ -7,7 +7,7 @@ import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 
 const routes: Routes = [
 { path: 'Index', component: IndexComponent},
-{ path: 'line', component: LineChartComponent},
+// { path: 'line', component: LineChartComponent},
 { path: 'StockFinder', component: PageComponent},
 { path: 'Portfolio', component: PortfolioComponent},
 ]
