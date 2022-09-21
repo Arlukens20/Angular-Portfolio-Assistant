@@ -39,8 +39,8 @@ export class StockServiceService {
   getPriceCustomDate(ticker:string, beginDate:string, endDate:string):Observable<object> {
     let body = new HttpParams()
     .set('symbol', ticker)
-    .set("end", "2022-04-30")
-    .set("start", "2022-01-01");
+    .set("end", endDate)
+    .set("start", beginDate);
   
     return this.http.post(this.ConfigUrl + '/price-customdate', body , {'headers':this.headers})
   }

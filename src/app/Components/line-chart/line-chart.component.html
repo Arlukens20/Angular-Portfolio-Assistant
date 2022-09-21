@@ -1,4 +1,11 @@
 
-<div class="chart-container">
+<!-- <div class="chart-container">
     <canvas  id="MyChart" >{{ chart }}</canvas>
-</div>
+</div> -->
+
+<tbody>
+    <tr *ngFor="let ch of this.chartArray">
+        <canvas  id="MyChart" >{{ ch}}</canvas>
+        <p>Chart Loop</p>
+    </tr>
+</tbody>

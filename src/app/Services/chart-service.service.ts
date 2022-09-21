@@ -5,16 +5,16 @@ import { Chart , ChartConfiguration, LineController, LineElement, PointElement, 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ChartServiceService {
 
-  constructor() { }
+  constructor( ) {
+   }
 
-
-  public show = false
+  public show = false;
   public chart: any;
 
   createChart(label:string[],data:string[]){  
-
     Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
 
     this.chart = new Chart("MyChart", {
@@ -35,9 +35,10 @@ export class ChartServiceService {
       }
       
     });
+    return this.chart
   }
 
-  destroyChart(){
-    if (this.chart) this.chart.destroy();
+  destroyCharts(){
+    console.log("ChartDestroy")
   }
 }

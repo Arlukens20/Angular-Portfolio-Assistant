@@ -6,6 +6,8 @@ import { StockServiceService } from '../../Services/stock-service.service';
 import { Subscriber, throwError} from  'rxjs';
 import { ChartServiceService } from 'src/app/Services/chart-service.service';
 import { ChartData } from 'src/app/Objects/chart-data';
+import { Chart } from 'chart.js';
+import { LineChartComponent } from '../line-chart/line-chart.component';
 
 @Component({
   selector: 'app-page',
@@ -24,7 +26,7 @@ export class PageComponent implements OnInit {
   model = new Stock('','','','','','','','','','','');
   chartModel = new ChartData([''],[''],['']);
 
-  constructor(private stockService: StockServiceService,private chartService:ChartServiceService) {
+  constructor(private stockService: StockServiceService,private chartService:ChartServiceService,private line:LineChartComponent) {
   }
 
   ngOnInit(): void {
@@ -66,15 +68,19 @@ export class PageComponent implements OnInit {
 
   async getPriceCustomDate(stock:string,beginDate:string,endDate:string) {
     this.model.Ticker = stock
-    console.log('Change the Ticker to ',this.model.Ticker," In getPriceCustomDate method of page");
+    console.log('Change the Ticker to ',this.model.Ticker," In getPriceCustomDate method of page", stock , beginDate , endDate);
     this.stockService.getPriceCustomDate(stock,beginDate,endDate).subscribe(data => {
-      
       this.model.response = JSON.stringify(data).toString()
       let obj = JSON.parse(this.model.response);
 
+      this.date = []
+      this.close = []
+      this.volume = []
+
       let i = 0
       do{
-        this.date.push(obj['data'][i]['Date'])
+        var date = new Date(obj['data'][i]['Date']).toLocaleDateString("en-us")
+        this.date.push(date)
         this.close.push(obj['data'][i]['Close'])
         this.volume.push(obj['data'][i]['Volume'])
         i++
@@ -84,22 +90,23 @@ export class PageComponent implements OnInit {
       this.chartModel.date = this.date;
       this.chartModel.volume = this.volume;
 
-      console.log(this.date,this.close,this.volume)
+      // console.log(this.date,this.close,this.volume)
     })
   }
 
-  buildChart(){
-    this.chartService.createChart(this.date,this.close)
+  buildCharts(){
+    this.line.buildChartArray(this.date,this.close)
+    this.line.buildChartArray(this.date,this.volume)
     console.log("Create Chart")
   }
 
-  clearChart(){
-    this.chartService.destroyChart();
+  clearCharts(){
+    this.chartService.destroyCharts();
   }
 
-  async JsonParser(obj:Object){
-    console.log(typeof obj)
+  // async JsonParser(obj:Object){
+  //   console.log(typeof obj)
 
-    // console.log(jsonObj)
-  }
+  //   // console.log(jsonObj)
+  // }
 }
