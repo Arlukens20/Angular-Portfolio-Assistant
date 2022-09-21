@@ -32,7 +32,7 @@ import { PortfolioComponent } from './app/Components/portfolio/portfolio.compone
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LineChartComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chart , ChartConfiguration, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale} from 'chart.js' 
+import { LineChartComponent } from "src/app/Components/line-chart/line-chart.component"
 
 
 @Injectable({
@@ -8,37 +9,19 @@ import { Chart , ChartConfiguration, LineController, LineElement, PointElement, 
 
 export class ChartServiceService {
 
-  constructor( ) {
+  constructor() {
    }
 
-  public show = false;
-  public chart: any;
+   public line = new LineChartComponent(this)
 
-  createChart(label:string[],data:string[]){  
-    Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
-
-    this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
-
-      data: {// values on X-Axis
-        labels: label, 
-	       datasets: [
-          {
-            label: "Sales",
-            data: data,
-            backgroundColor: 'blue'
-          }
-        ]
-      },
-      options: {
-        aspectRatio:2.5
-      }
-      
-    });
-    return this.chart
+   buildChartArray(array1:any[],array2:any[],array3:any[],array4:any[]){
+    console.log("ChartArray")
+    this.line.createChart(array1,array2)
+    this.line.createVolumeChart(array3,array4)
   }
 
   destroyCharts(){
+    this.line.destroy()
     console.log("ChartDestroy")
   }
 }

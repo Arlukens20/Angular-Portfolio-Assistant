@@ -18,18 +18,61 @@ export class LineChartComponent implements OnInit {
 
   public show = false
   public chart: any;
+  public chartVolume: any;
   public chartArray = [] as Chart[];
 
   ngOnInit(): void {
     Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
   }
 
-  buildChartArray(array1:any[],array2:any[]){
-    this.chartArray.push(this.chartService.createChart(array1,array2))
+  createChart(label:string[],data:string[]){  
+    // Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
+
+    this.chart = new Chart("MyChart", {
+      type: 'line', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: label, 
+	       datasets: [
+          {
+            label: "Sales",
+            data: data,
+            backgroundColor: 'blue'
+          }
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
   }
 
-  // toggle(){
-  //   this.show = !this.show
-  //   console.log("ran" + this.show)
-  // }
+  createVolumeChart(label:string[],data:string[]){  
+    // Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
+
+    this.chartVolume = new Chart("chartVolume", {
+      type: 'line', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: label, 
+	       datasets: [
+          {
+            label: "Sales",
+            data: data,
+            backgroundColor: 'blue'
+          }
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
+  }
+
+  destroy(){
+    this.chart.destroy()
+    this.chartVolume.destroy()
+  }
 }

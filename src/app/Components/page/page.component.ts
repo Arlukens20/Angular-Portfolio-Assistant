@@ -94,9 +94,12 @@ export class PageComponent implements OnInit {
     })
   }
 
+
+  // Better way to implement this? Every two creates a different chart
+  //1: date/close
+  //2: date/volume
   buildCharts(){
-    this.line.buildChartArray(this.date,this.close)
-    this.line.buildChartArray(this.date,this.volume)
+    this.chartService.buildChartArray(this.date,this.close,this.date,this.volume)
     console.log("Create Chart")
   }
 
