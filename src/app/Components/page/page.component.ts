@@ -35,6 +35,7 @@ export class PageComponent implements OnInit {
   public date = [] as string[]
   public close = [] as string[]
   public volume = [] as string[]
+  public showChart = false
   
 
   async getData(stock:string) {
@@ -100,11 +101,13 @@ export class PageComponent implements OnInit {
   //2: date/volume
   buildCharts(){
     this.chartService.buildChartArray(this.date,this.close,this.date,this.volume)
-    console.log("Create Chart")
+    this.showChart = true
+    // console.log("Create Chart")
   }
 
   clearCharts(){
     this.chartService.destroyCharts();
+    this.showChart = false
   }
 
   // async JsonParser(obj:Object){

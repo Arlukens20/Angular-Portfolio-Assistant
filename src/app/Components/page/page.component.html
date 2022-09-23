@@ -1,23 +1,25 @@
 <div class = "container">
     <h1>Stock Finder</h1>
-        <div>
+     <div>
         <label for = "Ticker"> Ticker: </label>
-        <p><input type="text" id="tickerA" name="tickerB" #ticker></p>
+        <input class="form-control" type="text" id="tickerA" name="tickerB" #ticker>
         <h1> {{model.Ticker}}</h1>
-        <button type="button" (click)="getData(ticker.value)">Search Data</button>
-        <button type="button" (click)="getPrice(ticker.value)">Search Price</button>
-       </div>
+        <button class="btn btn-primary" type="button" (click)="getData(ticker.value)">Search Data</button>
+        <button class="btn btn-primary" type="button" (click)="getPrice(ticker.value)">Search Price</button>
+    </div>
 
-       <div>
-        <p><input type="date" id="from" #fromInput></p>
-        <p><input type="date" id="thru" #thruInput></p>
-        <button type="button" (click)="getPriceCustomDate(ticker.value,fromInput.value,thruInput.value)">Search Price Custom</button>
-     </div>
+    <div>
+        <input class="form-control" type="date" id="from" #fromInput>
+        <input class="form-control" type="date" id="thru" #thruInput>
+        <button class="btn btn-primary" type="button" (click)="getPriceCustomDate(ticker.value,fromInput.value,thruInput.value)">Search Price Custom</button>
+    </div>
 
      <div *ngIf = 'chartModel.close'>
-        <button type="button" (click)="buildCharts()">Build Chart</button>
-        <button type="button" (click)="clearCharts()">Clear Chart</button>
+        <button class="btn btn-secondary" type="button" (click)="buildCharts()">Build Chart</button>
+        <button class="btn btn-secondary" type="button" (click)="clearCharts()">Clear Chart</button>
+        <div *ngIf = showChart>
         <app-line-chart></app-line-chart>
+     </div>
     </div>
  </div>
 
