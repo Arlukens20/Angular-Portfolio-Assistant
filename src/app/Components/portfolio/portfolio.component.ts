@@ -22,22 +22,31 @@ export class PortfolioComponent implements OnInit {
   }
 
   public stockArray: StockPortfolioItem[] = []
+  portfolioValue = 0
  
    
   addToPortfolio(ticker:string,quantity:string) {
     let obj = new StockPortfolioItem(ticker,quantity,StockPortfolioItem.length + 1)
     this.stockArray.push(obj)
-    console.log("addToPorfolio")
+
+    // Modify this for the price aspect?
+    this.portfolioValue += 11*parseInt(quantity);
+
+    console.log("Added " + ticker)
   }
 
-  trackByFn(index: number, item: any) {
-    console.log("trackbyFn")
-    return item.stockId;
+//   trackByFn(index: number, item: any) {
+
+
+//     console.log("trackbyFn" + item.stockId)
+//     return item.stockId;
     
- } 
+//  } 
 
-  remove(stockId:number){
-    // this.stockArray.remove
-    console.log("Remove Function" + stockId)
-  }
+  remove(index:number): void{ 
+    
+    //Modify this for the price aspect.
+    this.portfolioValue -= 11*parseInt(this.stockArray[index].Quantity)
+    this.stockArray.splice(index, 1)
+}
 }
