@@ -10,6 +10,9 @@
   <div display = table-cell>
     <button type="button" class="btn btn-secondary" (click) = "addToPortfolio(ticker.value,qty.value)">Submit</button>
   </div>
+  <div display = table-cell>
+    <button type="button" class="btn btn-secondary" (click) = "updatePortfolio()">Update Portfolio Value</button>
+  </div>
 </div>  
 
 <h1>
@@ -29,6 +32,7 @@
         <td>{{i + 1}}:</td> 
         <td>{{stock.Ticker}}</td>
         <td>{{stock.Quantity}}</td> 
+        <td>{{stock.price}}</td>
         <!-- <input [(ngModel)]="stock.Ticker">  -->
         <button class="btn btn-secondary" (click)="remove(i)">Remove</button>       
     </tr>
