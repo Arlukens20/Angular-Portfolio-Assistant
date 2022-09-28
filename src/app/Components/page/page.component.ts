@@ -1,6 +1,7 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Stock } from 'src/app/Objects/stock';
+import { StockEarnings } from 'src/app/Objects/stock-earnings';
 import { StockServiceService } from '../../Services/stock-service.service';
 
 import { Subscriber, throwError} from  'rxjs';
@@ -25,6 +26,9 @@ export class PageComponent implements OnInit {
   //Init model of stock here
   model = new Stock('','','','','','','','','','','');
   chartModel = new ChartData([''],[''],['']);
+  earningArray: StockEarnings[] = ([]);
+
+  
 
   constructor(private stockService: StockServiceService,private chartService:ChartServiceService,private line:LineChartComponent) {
   }
@@ -64,6 +68,37 @@ export class PageComponent implements OnInit {
       this.model.low = obj['data'][0]['Low'];
       this.model.high = obj['data'][0]['High'];
       this.model.volume = obj['data'][0]['Volume'];
+    })
+  }
+
+  async getFinancials(stock:string) {
+    this.model.Ticker = stock
+    console.log('Change the Ticker to ',this.model.Ticker," In getFinancials method of page");
+    this.stockService.getFinancials(stock).subscribe(data => {
+      this.model.response = JSON.stringify(data).toString();
+      let obj = JSON.parse(this.model.response);
+      console.log(obj)
+      // this.model.low = obj['data'][0]['Low'];
+      // this.model.high = obj['data'][0]['High'];
+      // this.model.volume = obj['data'][0]['Volume'];
+    })
+  }
+
+  async getEarnings(stock:string) {
+    this.model.Ticker = stock
+    console.log('Change the Ticker to ',this.model.Ticker," In getEarnings method of page");
+    this.stockService.getEarnings(stock).subscribe(data => {
+      this.model.response = JSON.stringify(data).toString();
+      let obj = JSON.parse(this.model.response);
+      
+      // for(let i = 0; i < this.model.response.length - 1; i++){
+        this.earningArray.push(new StockEarnings(obj['data'][0]['Earnings'],obj['data'][0]['Revenue'],obj['data'][0]['Year']))
+        this.earningArray.push(new StockEarnings(obj['data'][1]['Earnings'],obj['data'][1]['Revenue'],obj['data'][1]['Year']))
+        this.earningArray.push(new StockEarnings(obj['data'][2]['Earnings'],obj['data'][2]['Revenue'],obj['data'][2]['Year']))
+        this.earningArray.push(new StockEarnings(obj['data'][3]['Earnings'],obj['data'][3]['Revenue'],obj['data'][3]['Year']))
+        // console.log("Testing " + i)
+      // }
+      console.log(this.earningArray)
     })
   }
 
