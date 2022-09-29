@@ -9,6 +9,7 @@ import { ChartServiceService } from 'src/app/Services/chart-service.service';
 import { ChartData } from 'src/app/Objects/chart-data';
 import { Chart } from 'chart.js';
 import { LineChartComponent } from '../line-chart/line-chart.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-page',
@@ -30,7 +31,11 @@ export class PageComponent implements OnInit {
 
   
 
-  constructor(private stockService: StockServiceService,private chartService:ChartServiceService,private line:LineChartComponent) {
+  constructor(
+    private stockService: StockServiceService,
+    private chartService:ChartServiceService,
+    private line:LineChartComponent,
+    private toastr:ToastrService) {
   }
 
   ngOnInit(): void {
@@ -150,4 +155,12 @@ export class PageComponent implements OnInit {
 
   //   // console.log(jsonObj)
   // }
+
+  showToastr(){
+    // this.toastr.success('This is the success toastr')
+    this.toastr.error('Please try again',"Error",{
+      timeOut:10000,
+      closeButton:true
+    })
+  }
 }

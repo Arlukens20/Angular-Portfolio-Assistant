@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
@@ -30,7 +31,10 @@ import { PortfolioComponent } from './app/Components/portfolio/portfolio.compone
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+			positionClass: 'toast-top-center',
+})
   ],
   providers: [LineChartComponent],
   bootstrap: [AppComponent]
