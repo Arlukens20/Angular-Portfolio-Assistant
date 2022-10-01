@@ -53,13 +53,18 @@ export class PageComponent implements OnInit {
     this.stockService.getInfo(stock).subscribe(data => {
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
-      this.model.longBusinessSummary = obj['data']['longBusinessSummary'];
-      this.model.website = obj['data']['website'];
-      this.model.targetMeanPrice = obj['data']['targetMeanPrice'];
-      this.model.targetHighPrice = obj['data']['targetHighPrice'];
-      this.model.targetLowPrice = obj['data']['targetLowPrice'];
-      this.model.targetMedianPrice = obj['data']['targetMedianPrice'];
-      
+
+
+      if(obj['data'] == ''){
+        this.showToastr("Please Try again")
+      }else{
+        this.model.longBusinessSummary = obj['data']['longBusinessSummary'];
+        this.model.website = obj['data']['website'];
+        this.model.targetMeanPrice = obj['data']['targetMeanPrice'];
+        this.model.targetHighPrice = obj['data']['targetHighPrice'];
+        this.model.targetLowPrice = obj['data']['targetLowPrice'];
+        this.model.targetMedianPrice = obj['data']['targetMedianPrice'];
+      }
     })
   }
 
@@ -69,11 +74,16 @@ export class PageComponent implements OnInit {
     this.stockService.getPrice(stock).subscribe(data => {
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
-      // console.log(obj)
-      this.model.low = obj['data'][0]['Low'];
-      this.model.high = obj['data'][0]['High'];
-      this.model.volume = obj['data'][0]['Volume'];
-    })
+
+      if(obj['data'] == ''){
+        this.showToastr("Please Try again")
+      }else{
+        this.model.low = obj['data'][0]['Low'];
+        this.model.high = obj['data'][0]['High'];
+        this.model.volume = obj['data'][0]['Volume'];
+    }
+  })
+
   }
 
   async getFinancials(stock:string) {
@@ -83,9 +93,12 @@ export class PageComponent implements OnInit {
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
       console.log(obj)
-      // this.model.low = obj['data'][0]['Low'];
-      // this.model.high = obj['data'][0]['High'];
-      // this.model.volume = obj['data'][0]['Volume'];
+
+      if(obj['data'] == ''){
+        this.showToastr("Please Try again")
+      }else{
+       //Logic For Financials Here!!
+      }
     })
   }
 
@@ -96,13 +109,15 @@ export class PageComponent implements OnInit {
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
       
-      // for(let i = 0; i < this.model.response.length - 1; i++){
+      if(obj['data'] == ''){
+        this.showToastr("Please Try again")
+      }else{
         this.earningArray.push(new StockEarnings(obj['data'][0]['Earnings'],obj['data'][0]['Revenue'],obj['data'][0]['Year']))
         this.earningArray.push(new StockEarnings(obj['data'][1]['Earnings'],obj['data'][1]['Revenue'],obj['data'][1]['Year']))
         this.earningArray.push(new StockEarnings(obj['data'][2]['Earnings'],obj['data'][2]['Revenue'],obj['data'][2]['Year']))
         this.earningArray.push(new StockEarnings(obj['data'][3]['Earnings'],obj['data'][3]['Revenue'],obj['data'][3]['Year']))
         // console.log("Testing " + i)
-      // }
+      }
       console.log(this.earningArray)
     })
   }
@@ -119,6 +134,9 @@ export class PageComponent implements OnInit {
       this.volume = []
 
       let i = 0
+      if(obj['data'] == ''){
+        this.showToastr("Please Try again")
+      }else{
       do{
         var date = new Date(obj['data'][i]['Date']).toLocaleDateString("en-us")
         this.date.push(date)
@@ -130,8 +148,8 @@ export class PageComponent implements OnInit {
       this.chartModel.close = this.close;
       this.chartModel.date = this.date;
       this.chartModel.volume = this.volume;
-
-      // console.log(this.date,this.close,this.volume)
+    }
+     // console.log(this.date,this.close,this.volume)
     })
   }
 
@@ -156,9 +174,10 @@ export class PageComponent implements OnInit {
   //   // console.log(jsonObj)
   // }
 
-  showToastr(){
+
+  showToastr(msg:string){
     // this.toastr.success('This is the success toastr')
-    this.toastr.error('Please try again',"Error",{
+    this.toastr.error(msg,"Error",{
       timeOut:10000,
       closeButton:true
     })

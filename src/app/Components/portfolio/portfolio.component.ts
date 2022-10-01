@@ -24,16 +24,19 @@ export class PortfolioComponent implements OnInit {
 
   public stockArray: StockPortfolioItem[] = [];
   portfolioValue = 0;
+  totalCostBasis = 0;
   model = new Stock('','','','','','','','','','','');
  
-  addToPortfolio(ticker:string,quantity:string) {
+  addToPortfolio(ticker:string,quantity:string,costBasis:string) {
     this.stockService.getPrice(ticker).subscribe(data => {
       this.model.response = JSON.stringify(data).toString();
       let object = JSON.parse(this.model.response);
       console.log(object)
       this.model.low = object['data'][0]['Low'];
-      let obj = new StockPortfolioItem(ticker,quantity,StockPortfolioItem.length + 1,Number(this.model.low));
+      let obj = new StockPortfolioItem(ticker,quantity,costBasis,StockPortfolioItem.length + 1,Number(this.model.low));
       this.stockArray.push(obj);
+      
+      this.totalCostBasis += parseInt(obj.CostBasis)*parseInt(quantity)
       this.portfolioValue += obj.price*parseInt(quantity);
       console.log(this.portfolioValue)
     })
@@ -58,6 +61,8 @@ export class PortfolioComponent implements OnInit {
   remove(index:number): void{ 
     //Modify this for the price aspect.
     this.portfolioValue -= this.stockArray[index].price*parseInt(this.stockArray[index].Quantity)
+    this.totalCostBasis -= parseInt(this.stockArray[index].CostBasis)*parseInt(this.stockArray[index].Quantity)
+
     this.stockArray.splice(index, 1)
   }
 }

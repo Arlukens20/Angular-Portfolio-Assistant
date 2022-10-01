@@ -8,7 +8,11 @@
     <input type="text" name="qty" placeholder="Amount" #qty>
   </div>
   <div display = table-cell>
-    <button type="button" class="btn btn-secondary" (click) = "addToPortfolio(ticker.value,qty.value)">Submit</button>
+    <label>Enter Stock Cost Basis: </label>
+    <input type="text" name="cost" placeholder="Amount" #cost>
+  </div>
+  <div display = table-cell>
+    <button type="button" class="btn btn-secondary" (click) = "addToPortfolio(ticker.value,qty.value,cost.value)">Submit</button>
   </div>
   <div display = table-cell>
     <button type="button" class="btn btn-secondary" (click) = "updatePortfolio()">Update Portfolio Value</button>
@@ -19,19 +23,25 @@
   Portfolio Value: {{portfolioValue}}
 </h1>
 
+<h1>
+  Unrealized Gains: {{portfolioValue - totalCostBasis}}
+</h1>
+
 <div>
   <table>
     <tr>
       <th>Index</th>
       <th>Ticker</th>
       <th>Quantity</th>
-      <th>Price</th>
+      <th>Current Price</th>
+      <th>Cost Basis</th>
     </tr>
 
     <tr *ngFor="let stock of stockArray; index as i">
         <td>{{i + 1}}:</td> 
         <td>{{stock.Ticker}}</td>
         <td>{{stock.Quantity}}</td> 
+        <td>{{stock.CostBasis}}</td>
         <td>{{stock.price}}</td>
         <!-- <input [(ngModel)]="stock.Ticker">  -->
         <button class="btn btn-secondary" (click)="remove(i)">Remove</button>       
