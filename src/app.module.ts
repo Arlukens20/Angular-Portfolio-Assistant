@@ -14,6 +14,8 @@ import { PageComponent } from './app/Components/page/page.component';
 import { LineChartComponent } from './app/Components/line-chart/line-chart.component';
 import { IndexComponent } from './app/Components/index/index.component';
 import { PortfolioComponent } from './app/Components/portfolio/portfolio.component';
+import { AboutComponent } from './app/Components/about/about.component';
+import { MetricPageComponent } from './app/Components/metric-page/metric-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { PortfolioComponent } from './app/Components/portfolio/portfolio.compone
     LineChartComponent,
     IndexComponent,
     PortfolioComponent,
+    AboutComponent,
+    MetricPageComponent,
   ],
   imports: [
     BrowserModule,
