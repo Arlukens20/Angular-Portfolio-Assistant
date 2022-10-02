@@ -1,0 +1,31 @@
+div {
+    margin-bottom: 10px;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+    color: #000000;
+  }
+  input {
+    padding: 5px 10px;
+  }
+
+
+  
+
+table { 
+    width: 1000px; 
+    border-collapse: collapse; 
+    margin:50px auto;
+    }
+  
+  /* Zebra striping */
+  tr:nth-of-type(odd) { 
+    background: #eee; 
+    }
+  
+  th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
+    }

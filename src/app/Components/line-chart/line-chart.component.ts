@@ -3,6 +3,7 @@ import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Chart , ChartConfiguration, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale} from 'chart.js' 
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { ChartServiceService } from 'src/app/Services/chart-service.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -12,21 +13,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 export class LineChartComponent implements OnInit {
 
-  constructor() {
+  constructor(private chartService:ChartServiceService) {
   }
+
   public show = false
   public chart: any;
-  public labels = ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-  '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ]
-
-  public data = ['467','576', '572', '79', '92','574', '573', '576']
+  public chartVolume: any;
+  public chartTwo:any;
+  public chartArray = [] as Chart[];
 
   ngOnInit(): void {
     Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
-    // this.createChart(this.labels,this.data);
   }
 
   createChart(label:string[],data:string[]){  
+    // Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
+
     this.chart = new Chart("MyChart", {
       type: 'line', //this denotes tha type of chart
 
@@ -47,8 +49,54 @@ export class LineChartComponent implements OnInit {
     });
   }
 
-  toggle(){
-    this.show = !this.show
-    console.log("ran" + this.show)
+  createVolumeChart(label:string[],data:string[]){  
+    // Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
+
+    this.chartVolume = new Chart("chartVolume", {
+      type: 'line', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: label, 
+	       datasets: [
+          {
+            label: "Sales",
+            data: data,
+            backgroundColor: 'blue'
+          }
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
+  }
+
+  createTwoChart(label:string[],data:string[]){  
+    // Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
+
+    this.chartTwo = new Chart("chartTwo", {
+      type: 'line', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: label, 
+	       datasets: [
+          {
+            label: "Sales",
+            data: data,
+            backgroundColor: 'blue'
+          }
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
+  }
+
+  destroy(){
+    this.chart.destroy()
+    this.chartVolume.destroy()
   }
 }

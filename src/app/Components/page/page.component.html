@@ -1,25 +1,30 @@
 <div class = "container">
     <h1>Stock Finder</h1>
-        <div>
+     <div>
         <label for = "Ticker"> Ticker: </label>
-        <p><input type="text" id="tickerA" name="tickerB" #ticker></p>
+        <input class="form-control" type="text" id="tickerA" name="tickerB" #ticker>
         <h1> {{model.Ticker}}</h1>
-        <button type="button" (click)="getData(ticker.value)">Search Data</button>
-        <button type="button" (click)="getPrice(ticker.value)">Search Price</button>
-        <button type="button" (click)="getPriceCustomDate(ticker.value,from.value,thru.value)">Search Price Custom</button>
-       </div>
- </div>
+        <button class="btn btn-primary" type="button" (click)="getData(ticker.value)">Search Data</button>
+        <button class="btn btn-primary" type="button" (click)="getPrice(ticker.value)">Search Price</button>
+        <button class="btn btn-primary" type="button" (click)="getFinancials(ticker.value)">Search Financials</button>
+        <button class="btn btn-primary" type="button" (click)="getEarnings(ticker.value)">Search Earnings</button>
+        <button class="btn btn-primary" type="button" (click)="showToastr('testing')">Show Toast</button>
+    </div>
 
- <div>
-    <p><input type="date" id="from" name="from" #from></p>
-    <p><input type="date" id="thru" name="thru" #thru></p>
- </div>
+    <div>
+        <input class="form-control" type="date" id="from" #fromInput>
+        <input class="form-control" type="date" id="thru" #thruInput>
+        <button class="btn btn-primary" type="button" (click)="getPriceCustomDate(ticker.value,fromInput.value,thruInput.value)">Search Price Custom</button>
+    </div>
 
-<div *ngIf = 'chartModel.close'>
-    <button type="button" (click)="buildChart()">Build Chart</button>
-    <button type="button" (click)="clearChart()">Clear Chart</button>
-    <app-line-chart></app-line-chart>
-</div>
+     <div *ngIf = 'chartModel.close'>
+        <button class="btn btn-secondary" type="button" (click)="buildCharts()">Build Chart</button>
+        <button class="btn btn-secondary" type="button" (click)="clearCharts()">Clear Chart</button>
+        <div *ngIf = showChart>
+        <app-line-chart></app-line-chart>
+     </div>
+    </div>
+ </div>
 
  <div *ngIf = 'model.response'>
     <h1>Response for Testing</h1>

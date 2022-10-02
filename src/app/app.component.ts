@@ -20,7 +20,15 @@ export class AppComponent {
   }
 
   goToPage() {
-    this.router.navigate(['/', 'StockFinder']);
+    this.router.navigate(['/', 'Stock']);
+  }
+
+  goToMetrics() {
+    this.router.navigate(['/', 'Metric']);
+  }
+
+  goToAbout() {
+    this.router.navigate(['/', 'About']);
   }
 
   // goToLine() {

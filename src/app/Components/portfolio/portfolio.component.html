@@ -1,16 +1,52 @@
-<p>Please enter a stock Ticker in your portfolio</p>
-<input type="text" name="ticker" placeholder="Ticker" #ticker>
-<p>Please enter a quantity</p>
-<input type="text" name="qty" placeholder="amount" #qty>
-<button type="button" (click) = "addToPortfolio(ticker.value,qty.value)">Submit</button>  
+<div display = table>
+  <div display = table-cell>
+    <label>Enter Stock Ticker: </label>
+    <input type="text" name="ticker" placeholder="Symbol" #ticker>
+  </div>
+  <div display = table-cell>
+    <label>Enter Stock Quantity: </label>
+    <input type="text" name="qty" placeholder="Amount" #qty>
+  </div>
+  <div display = table-cell>
+    <label>Enter Stock Cost Basis: </label>
+    <input type="text" name="cost" placeholder="Amount" #cost>
+  </div>
+  <div display = table-cell>
+    <button type="button" class="btn btn-secondary" (click) = "addToPortfolio(ticker.value,qty.value,cost.value)">Submit</button>
+  </div>
+  <div display = table-cell>
+    <button type="button" class="btn btn-secondary" (click) = "updatePortfolio()">Update Portfolio Value</button>
+  </div>
+</div>  
+
+<h1>
+  Portfolio Value: {{portfolioValue}}
+</h1>
+
+<h1>
+  Unrealized Gains: {{portfolioValue - totalCostBasis}}
+</h1>
 
 <div>
-  <ul>
-    <li *ngFor="let stock of stockArray; index as i; trackBy: trackByFn">
-        {{i + 1}}: {{stock.Ticker}} - {{stock.Quantity}} 
+  <table>
+    <tr>
+      <th>Index</th>
+      <th>Ticker</th>
+      <th>Quantity</th>
+      <th>Current Price</th>
+      <th>Cost Basis</th>
+    </tr>
+
+    <tr *ngFor="let stock of stockArray; index as i">
+        <td>{{i + 1}}:</td> 
+        <td>{{stock.Ticker}}</td>
+        <td>{{stock.Quantity}}</td> 
+        <td>{{stock.CostBasis}}</td>
+        <td>{{stock.price}}</td>
         <!-- <input [(ngModel)]="stock.Ticker">  -->
-        <button (click)="remove(stock.stockId)">Remove</button>       
-    </li>
- </ul> 
-<p>Testing</p>
+        <button class="btn btn-secondary" (click)="remove(i)">Remove</button>       
+    </tr>
+  </table>
+
+<!-- <p>Testing</p> -->
 </div>

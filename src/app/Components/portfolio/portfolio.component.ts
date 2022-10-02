@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { StockPortfolioItem } from 'src/app/Objects/stock-portfolio-item';
+import { StockServiceService } from 'src/app/Services/stock-service.service';
+import { Stock } from 'src/app/Objects/stock';
 
 @Component({
   selector: 'app-portfolio',
@@ -12,32 +14,55 @@ export class PortfolioComponent implements OnInit {
   // article: { title: string, text: string } = {
   //   title: "default title",
   //   text: "default text",
-  // };
-  
+  // }
 
-  constructor() { 
+  constructor(private stockService: StockServiceService) { 
   }
 
   ngOnInit(): void {
   }
 
-  public stockArray: StockPortfolioItem[] = []
+  public stockArray: StockPortfolioItem[] = [];
+  portfolioValue = 0;
+  totalCostBasis = 0;
+  model = new Stock('','','','','','','','','','','');
  
-   
-  addToPortfolio(ticker:string,quantity:string) {
-    let obj = new StockPortfolioItem(ticker,quantity,StockPortfolioItem.length + 1)
-    this.stockArray.push(obj)
-    console.log("addToPorfolio")
+  addToPortfolio(ticker:string,quantity:string,costBasis:string) {
+    this.stockService.getPrice(ticker).subscribe(data => {
+      this.model.response = JSON.stringify(data).toString();
+      let object = JSON.parse(this.model.response);
+      console.log(object)
+      this.model.low = object['data'][0]['Low'];
+      let obj = new StockPortfolioItem(ticker,quantity,costBasis,StockPortfolioItem.length + 1,Number(this.model.low));
+      this.stockArray.push(obj);
+      
+      this.totalCostBasis += parseInt(obj.CostBasis)*parseInt(quantity)
+      this.portfolioValue += obj.price*parseInt(quantity);
+      console.log(this.portfolioValue)
+    })
+
+    
+    // Modify this for the price aspect?
+    console.log("Added ", ticker)
   }
 
-  trackByFn(index: number, item: any) {
-    console.log("trackbyFn")
-    return item.stockId;
-    
- } 
+  updatePortfolio() {
+    console.log("Update Portfolio")
+  }
 
-  remove(stockId:number){
-    // this.stockArray.remove
-    console.log("Remove Function" + stockId)
+//   trackByFn(index: number, item: any) {
+
+
+//     console.log("trackbyFn" + item.stockId)
+//     return item.stockId;
+    
+//  } 
+
+  remove(index:number): void{ 
+    //Modify this for the price aspect.
+    this.portfolioValue -= this.stockArray[index].price*parseInt(this.stockArray[index].Quantity)
+    this.totalCostBasis -= parseInt(this.stockArray[index].CostBasis)*parseInt(this.stockArray[index].Quantity)
+
+    this.stockArray.splice(index, 1)
   }
 }

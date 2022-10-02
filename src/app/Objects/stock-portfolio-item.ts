@@ -4,6 +4,8 @@ export class StockPortfolioItem {
 
     public Ticker: string,
     public Quantity: string,
-    public stockId:number
+    public CostBasis:string,
+    public stockId:number,
+    public price:number
     ){}
 }

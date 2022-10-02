@@ -1,0 +1,13 @@
+/* Not Working want to set the width of the charts. */
+
+#MyChart{
+    display: block;
+    width:50%;
+    height: 50%;
+}   
+
+#chartVolume{
+    display: block;
+    width:50%;
+    height: 50%;
+} 

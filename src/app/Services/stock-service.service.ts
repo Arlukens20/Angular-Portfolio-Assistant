@@ -26,6 +26,18 @@ export class StockServiceService {
     return this.http.post(this.ConfigUrl + '/stock-info', body , {'headers':this.headers})
   }
 
+  getFinancials(ticker:string):Observable<object>{
+    let body = new HttpParams()
+    .set('symbol', ticker);
+    return this.http.post(this.ConfigUrl + '/financials', body , {'headers':this.headers})
+  }
+
+  getEarnings(ticker:string):Observable<object>{
+    let body = new HttpParams()
+    .set('symbol', ticker);
+    return this.http.post(this.ConfigUrl + '/earnings', body , {'headers':this.headers})
+  }
+
   //Todo add in a date 
   getPrice(ticker:string):Observable<object>{
     let body = new HttpParams()
@@ -39,9 +51,11 @@ export class StockServiceService {
   getPriceCustomDate(ticker:string, beginDate:string, endDate:string):Observable<object> {
     let body = new HttpParams()
     .set('symbol', ticker)
-    .set("end", "2022-04-30")
-    .set("start", "2022-01-01");
+    .set("end", endDate)
+    .set("start", beginDate);
   
     return this.http.post(this.ConfigUrl + '/price-customdate', body , {'headers':this.headers})
   }
+
+
 }
