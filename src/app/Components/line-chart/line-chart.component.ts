@@ -11,7 +11,7 @@ import { ChartServiceService } from 'src/app/Services/chart-service.service';
   styleUrls: ['./line-chart.component.css']
 })
 
-export class LineChartComponent implements OnInit {
+export class ChartComponent implements OnInit {
 
   constructor(private chartService:ChartServiceService) {
   }
@@ -19,6 +19,7 @@ export class LineChartComponent implements OnInit {
   public show = false
   public chart: any;
   public chartVolume: any;
+  public chartEarnings:any;
   public chartTwo:any;
   public chartArray = [] as Chart[];
 
@@ -53,6 +54,29 @@ export class LineChartComponent implements OnInit {
     // Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
 
     this.chartVolume = new Chart("chartVolume", {
+      type: 'line', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: label, 
+	       datasets: [
+          {
+            label: "Sales",
+            data: data,
+            backgroundColor: 'blue'
+          }
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
+  }
+  
+  createEarningsChart(label:string[],data:string[]){  
+    // Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title)
+
+    this.chartEarnings = new Chart("chartEarnings", {
       type: 'line', //this denotes tha type of chart
 
       data: {// values on X-Axis

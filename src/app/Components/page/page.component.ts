@@ -8,7 +8,7 @@ import { Subscriber, throwError} from  'rxjs';
 import { ChartServiceService } from 'src/app/Services/chart-service.service';
 import { ChartData } from 'src/app/Objects/chart-data';
 import { Chart } from 'chart.js';
-import { LineChartComponent } from '../line-chart/line-chart.component';
+import { ChartComponent } from '../line-chart/line-chart.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -34,7 +34,7 @@ export class PageComponent implements OnInit {
   constructor(
     private stockService: StockServiceService,
     private chartService:ChartServiceService,
-    private line:LineChartComponent,
+    private line:ChartComponent,
     private toastr:ToastrService) {
   }
 
@@ -157,8 +157,16 @@ export class PageComponent implements OnInit {
   // Better way to implement this? Every two creates a different chart
   //1: date/close
   //2: date/volume
+  //3: year/revenue
   buildCharts(){
-    this.chartService.buildChartArray(this.date,this.close,this.date,this.volume)
+    if(this.date[0] != null){
+      this.chartService.buildCloseChart(this.date,this.close)
+      this.chartService.buildVolumeChart(this.date,this.volume)
+    }
+
+    if(this.earningArray != null){
+      this.chartService.buildEarningsChart(this.earningArray)
+    }
     this.showChart = true
     // console.log("Create Chart")
   }

@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
 import { MaterialModule } from './app/Components/material/material.module';
 import { PageComponent } from './app/Components/page/page.component';
-import { LineChartComponent } from './app/Components/line-chart/line-chart.component';
+import { ChartComponent } from './app/Components/line-chart/line-chart.component';
 import { IndexComponent } from './app/Components/index/index.component';
 import { PortfolioComponent } from './app/Components/portfolio/portfolio.component';
 import { AboutComponent } from './app/Components/about/about.component';
@@ -21,7 +21,7 @@ import { MetricPageComponent } from './app/Components/metric-page/metric-page.co
   declarations: [
     AppComponent,
     PageComponent,
-    LineChartComponent,
+    ChartComponent,
     IndexComponent,
     PortfolioComponent,
     AboutComponent,
@@ -40,7 +40,7 @@ import { MetricPageComponent } from './app/Components/metric-page/metric-page.co
 			positionClass: 'toast-top-center',
 })
   ],
-  providers: [LineChartComponent],
+  providers: [ChartComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

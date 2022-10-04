@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './Components/index/index.component';
 import { PageComponent } from './Components/page/page.component';
-import { LineChartComponent } from './Components/line-chart/line-chart.component';
+import { ChartComponent } from './Components/line-chart/line-chart.component';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { AboutComponent } from './Components/about/about.component';
 import { MetricPageComponent } from './Components/metric-page/metric-page.component';
