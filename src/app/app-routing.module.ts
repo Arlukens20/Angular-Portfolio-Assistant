@@ -6,6 +6,7 @@ import { ChartComponent } from './Components/line-chart/line-chart.component';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { AboutComponent } from './Components/about/about.component';
 import { MetricPageComponent } from './Components/metric-page/metric-page.component';
+import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
 { path: 'Index', component: IndexComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
 { path: 'Stock', component: PageComponent},
 { path: 'Portfolio', component: PortfolioComponent},
 { path: 'About', component:AboutComponent},
-{ path: 'Metric', component: MetricPageComponent}
+{ path: 'Metric', component: MetricPageComponent},
+{path: '**', component: PageNotFoundComponent}
 ]
 
 

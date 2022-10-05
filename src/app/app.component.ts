@@ -14,28 +14,29 @@ export class AppComponent {
 
 
 //Methods to go to route to specific Componets.
+//Remove when changed Buttons to A tags.
 
-  goToIndex() {
-    this.router.navigate(['/', 'Index']);
-  }
-
-  goToPage() {
-    this.router.navigate(['/', 'Stock']);
-  }
-
-  goToMetrics() {
-    this.router.navigate(['/', 'Metric']);
-  }
-
-  goToAbout() {
-    this.router.navigate(['/', 'About']);
-  }
-
-  // goToLine() {
-  //   this.router.navigate(['/', 'line']);
+  // goToIndex() {
+  //   this.router.navigate(['/', 'Index']);
   // }
 
-  goToPortfolio() {
-    this.router.navigate(['/', 'Portfolio']);
-  }
+  // goToPage() {
+  //   this.router.navigate(['/', 'Stock']);
+  // }
+
+  // goToMetrics() {
+  //   this.router.navigate(['/', 'Metric']);
+  // }
+
+  // goToAbout() {
+  //   this.router.navigate(['/', 'About']);
+  // }
+
+  // // goToLine() {
+  // //   this.router.navigate(['/', 'line']);
+  // // }
+
+  // goToPortfolio() {
+  //   this.router.navigate(['/', 'Portfolio']);
+  // }
 }

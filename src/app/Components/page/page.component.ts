@@ -29,8 +29,6 @@ export class PageComponent implements OnInit {
   chartModel = new ChartData([''],[''],['']);
   earningArray: StockEarnings[] = ([]);
 
-  
-
   constructor(
     private stockService: StockServiceService,
     private chartService:ChartServiceService,
@@ -45,15 +43,24 @@ export class PageComponent implements OnInit {
   public close = [] as string[]
   public volume = [] as string[]
   public showChart = false
-  
+
+  //Method use to send all API requests.
+  async sendAll(stock:string){
+    console.log("SendAll")
+    this.getData(stock)
+    this.getPrice(stock)
+    this.getFinancials(stock)
+    this.getEarnings(stock)
+  }
 
   async getData(stock:string) {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getData method of page");
     this.stockService.getInfo(stock).subscribe(data => {
+
+      //Convert the data into a json Obj
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
-
 
       if(obj['data'] == ''){
         this.showToastr("Please Try again")
@@ -72,6 +79,8 @@ export class PageComponent implements OnInit {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getPrice method of page");
     this.stockService.getPrice(stock).subscribe(data => {
+
+      //Convert the data into a json Obj
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
 
@@ -90,9 +99,11 @@ export class PageComponent implements OnInit {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getFinancials method of page");
     this.stockService.getFinancials(stock).subscribe(data => {
+
+      //Convert the data into a json Obj
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
-      console.log(obj)
+      // console.log(obj)
 
       if(obj['data'] == ''){
         this.showToastr("Please Try again")
@@ -106,6 +117,8 @@ export class PageComponent implements OnInit {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getEarnings method of page");
     this.stockService.getEarnings(stock).subscribe(data => {
+
+      //Convert the data into a json Obj
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
       
@@ -126,6 +139,8 @@ export class PageComponent implements OnInit {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getPriceCustomDate method of page", stock , beginDate , endDate);
     this.stockService.getPriceCustomDate(stock,beginDate,endDate).subscribe(data => {
+
+      //Convert the data into a json Obj
       this.model.response = JSON.stringify(data).toString()
       let obj = JSON.parse(this.model.response);
 
@@ -175,13 +190,6 @@ export class PageComponent implements OnInit {
     this.chartService.destroyCharts();
     this.showChart = false
   }
-
-  // async JsonParser(obj:Object){
-  //   console.log(typeof obj)
-
-  //   // console.log(jsonObj)
-  // }
-
 
   showToastr(msg:string){
     // this.toastr.success('This is the success toastr')

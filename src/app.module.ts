@@ -16,6 +16,7 @@ import { IndexComponent } from './app/Components/index/index.component';
 import { PortfolioComponent } from './app/Components/portfolio/portfolio.component';
 import { AboutComponent } from './app/Components/about/about.component';
 import { MetricPageComponent } from './app/Components/metric-page/metric-page.component';
+import { PageNotFoundComponent } from './app/Components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MetricPageComponent } from './app/Components/metric-page/metric-page.co
     PortfolioComponent,
     AboutComponent,
     MetricPageComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
