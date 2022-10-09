@@ -1,4 +1,4 @@
-<div display = table>
+<div display = table style="margin:15px ;">
   <div display = table-cell>
     <label>Enter Stock Ticker: </label>
     <input type="text" name="ticker" placeholder="Symbol" #ticker>
@@ -18,14 +18,14 @@
     <button type="button" class="btn btn-secondary" (click) = "updatePortfolio()">Update Portfolio Value</button>
   </div>
 </div>  
-
-<h1>
-  Portfolio Value: {{portfolioValue}}
-</h1>
-
-<h1>
-  Unrealized Gains: {{portfolioValue - totalCostBasis}}
-</h1>
+<div style="margin:15px">
+  <h1>
+    Portfolio Value: {{portfolioValue}}
+  </h1>
+  <h1>
+    Unrealized Gains: {{portfolioValue - totalCostBasis}}
+  </h1>
+</div>
 
 <div>
   <table>
@@ -47,6 +47,4 @@
         <button class="btn btn-secondary" (click)="remove(i)">Remove</button>       
     </tr>
   </table>
-
-<!-- <p>Testing</p> -->
 </div>
