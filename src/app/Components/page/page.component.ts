@@ -37,12 +37,17 @@ export class PageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  //  this.getIndexValues()
   }
 
   public date = [] as string[]
   public close = [] as string[]
   public volume = [] as string[]
   public showChart = false
+
+  public nasdaq = 0
+  public spy = 0
+  public dow = 0
 
   //Method use to send all API requests.
   async sendAll(stock:string){
@@ -53,14 +58,70 @@ export class PageComponent implements OnInit {
     this.getEarnings(stock)
   }
 
+  //How to get these values?
+  getIndexValues(){
+    console.log('Get Index');
+
+    //Spy
+    this.stockService.getPrice("^GSPC").subscribe(data => {
+
+      //Convert the data into a json Obj
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
+
+      if(obj['data'] == ''){
+        this.showToastr("Please Try again")
+      }else{
+        this.spy = Math.floor(Number(obj['data'][0]['Close']));
+        console.log(this.spy)
+    }
+  })
+
+  //NasDaq
+  console.log('Get Index');
+  this.stockService.getPrice("^IXIC").subscribe(data => {
+
+    //Convert the data into a json Obj
+    // this.model.response = JSON.stringify(data).toString();
+    // let obj = JSON.parse(this.model.response);
+    let obj = JSON.parse(JSON.stringify(data).toString())
+
+    if(obj['data'] == ''){
+      this.showToastr("Please Try again")
+    }else{
+      this.nasdaq = Math.floor(Number(obj['data'][0]['Close']));
+      console.log(this.nasdaq)
+  }
+})
+
+//DOW ^DJI
+console.log('Get Index');
+this.stockService.getPrice("^DJI").subscribe(data => {
+
+  //Convert the data into a json Obj
+  // this.model.response = JSON.stringify(data).toString();
+  // let obj = JSON.parse(this.model.response);
+  let obj = JSON.parse(JSON.stringify(data).toString())
+
+  if(obj['data'] == ''){
+    this.showToastr("Please Try again")
+  }else{
+    this.dow = Math.floor(Number(obj['data'][0]['Close']));
+    console.log(this.dow)
+}
+})
+}
+
   async getData(stock:string) {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getData method of page");
     this.stockService.getInfo(stock).subscribe(data => {
 
       //Convert the data into a json Obj
-      this.model.response = JSON.stringify(data).toString();
-      let obj = JSON.parse(this.model.response);
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
 
       if(obj['data'] == ''){
         this.showToastr("Please Try again")
@@ -81,8 +142,9 @@ export class PageComponent implements OnInit {
     this.stockService.getPrice(stock).subscribe(data => {
 
       //Convert the data into a json Obj
-      this.model.response = JSON.stringify(data).toString();
-      let obj = JSON.parse(this.model.response);
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
 
       if(obj['data'] == ''){
         this.showToastr("Please Try again")
@@ -101,8 +163,10 @@ export class PageComponent implements OnInit {
     this.stockService.getFinancials(stock).subscribe(data => {
 
       //Convert the data into a json Obj
-      this.model.response = JSON.stringify(data).toString();
-      let obj = JSON.parse(this.model.response);
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+
+      let obj = JSON.parse(JSON.stringify(data).toString())
       // console.log(obj)
 
       if(obj['data'] == ''){
@@ -115,7 +179,7 @@ export class PageComponent implements OnInit {
 
   async getEarnings(stock:string) {
     this.model.Ticker = stock
-    console.log('Change the Ticker to ',this.model.Ticker," In getEarnings method of page");
+    // console.log('Change the Ticker to ',this.model.Ticker," In getEarnings method of page");
     this.stockService.getEarnings(stock).subscribe(data => {
 
       //Convert the data into a json Obj
