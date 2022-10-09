@@ -17,6 +17,8 @@ import { PortfolioComponent } from './app/Components/portfolio/portfolio.compone
 import { AboutComponent } from './app/Components/about/about.component';
 import { MetricPageComponent } from './app/Components/metric-page/metric-page.component';
 import { PageNotFoundComponent } from './app/Components/page-not-found/page-not-found.component';
+import { ForexComponent } from './app/Components/forex/forex.component';
+import { CryptoComponent } from './app/Components/crypto/crypto.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { PageNotFoundComponent } from './app/Components/page-not-found/page-not-
     AboutComponent,
     MetricPageComponent,
     PageNotFoundComponent,
+    ForexComponent,
+    CryptoComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { AboutComponent } from './Components/about/about.component';
 import { MetricPageComponent } from './Components/metric-page/metric-page.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { ForexComponent } from './Components/forex/forex.component';
+import { CryptoComponent } from './Components/crypto/crypto.component';
 
 const routes: Routes = [
 { path: 'Index', component: IndexComponent},
@@ -15,6 +17,8 @@ const routes: Routes = [
 { path: 'Portfolio', component: PortfolioComponent},
 { path: 'About', component:AboutComponent},
 { path: 'Metric', component: MetricPageComponent},
+{ path: 'Forex', component: ForexComponent},
+{ path: 'Crypto', component: CryptoComponent},
 {path: '**', component: PageNotFoundComponent}
 ]
 
