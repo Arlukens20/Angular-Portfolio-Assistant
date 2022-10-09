@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
@@ -39,6 +40,7 @@ import { CryptoComponent } from './app/Components/crypto/crypto.component';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
+    MatSelectModule,
     HttpClientModule,
     NgbModule,
     FormsModule,
