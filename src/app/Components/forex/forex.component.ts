@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrencyServiceService } from 'src/app/Services/currency-service.service';
 
 @Component({
   selector: 'app-forex',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForexComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private currencyService:CurrencyServiceService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -28,12 +31,31 @@ export class ForexComponent implements OnInit {
   }
 
 
-  convertCurrency(amount:String){
+  async getList() {
+    console.log('GetList')
+    this.currencyService.getList().subscribe(data => {
 
+      //Convert the data into a json Obj
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
+      console.log(obj)
+      })
+  }
+
+
+  convertCurrency(){
     //Make API call. 
     //Multiple factor by amount and then return the amount in the second currency!
-    this.currencyA
-  }
+    this.currencyService.getConvertor("AUD","CAD").subscribe(data => {
+
+      //Convert the data into a json Obj
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
+      console.log(obj)
+  })
+}
 }
 
 

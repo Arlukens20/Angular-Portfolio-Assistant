@@ -17,7 +17,7 @@ export class StockServiceService {
 
   headers= new HttpHeaders()
   .set('content-type', 'application/x-www-form-urlencoded')
-  .set('X-RapidAPI-Key', '3a9a04e3a1mshc14cbfe69161464p17d346jsndcc115ef68b8')
+  .set('X-RapidAPI-Key', '')
   .set('X-RapidAPI-Host', 'yahoo-finance97.p.rapidapi.com');
 
   getInfo(ticker:string):Observable<object>{
