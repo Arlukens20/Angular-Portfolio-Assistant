@@ -46,5 +46,6 @@ testem.log
 Thumbs.db
 
 
-# API Keys
-src/app/Services/Key.txt
+#Ignore any text file?
+# Need to protect keys.
+*.txt
