@@ -8,7 +8,7 @@ import { Subscriber, throwError} from  'rxjs';
 import { ChartServiceService } from 'src/app/Services/chart-service.service';
 import { ChartData } from 'src/app/Objects/chart-data';
 import { Chart } from 'chart.js';
-import { LineChartComponent } from '../line-chart/line-chart.component';
+import { ChartComponent } from '../line-chart/line-chart.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -29,31 +29,99 @@ export class PageComponent implements OnInit {
   chartModel = new ChartData([''],[''],['']);
   earningArray: StockEarnings[] = ([]);
 
-  
-
   constructor(
     private stockService: StockServiceService,
     private chartService:ChartServiceService,
-    private line:LineChartComponent,
+    private line:ChartComponent,
     private toastr:ToastrService) {
   }
 
   ngOnInit(): void {
+  //  this.getIndexValues()
   }
 
   public date = [] as string[]
   public close = [] as string[]
   public volume = [] as string[]
   public showChart = false
-  
+
+  public nasdaq = 0
+  public spy = 0
+  public dow = 0
+
+  //Method use to send all API requests.
+  async sendAll(stock:string){
+    console.log("SendAll")
+    this.getData(stock)
+    this.getPrice(stock)
+    this.getFinancials(stock)
+    this.getEarnings(stock)
+  }
+
+  //How to get these values?
+  getIndexValues(){
+    console.log('Get Index');
+
+    //Spy
+    this.stockService.getPrice("^GSPC").subscribe(data => {
+
+      //Convert the data into a json Obj
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
+
+      if(obj['data'] == ''){
+        this.showToastr("Please Try again")
+      }else{
+        this.spy = Math.floor(Number(obj['data'][0]['Close']));
+        console.log(this.spy)
+    }
+  })
+
+  //NasDaq
+  console.log('Get Index');
+  this.stockService.getPrice("^IXIC").subscribe(data => {
+
+    //Convert the data into a json Obj
+    // this.model.response = JSON.stringify(data).toString();
+    // let obj = JSON.parse(this.model.response);
+    let obj = JSON.parse(JSON.stringify(data).toString())
+
+    if(obj['data'] == ''){
+      this.showToastr("Please Try again")
+    }else{
+      this.nasdaq = Math.floor(Number(obj['data'][0]['Close']));
+      console.log(this.nasdaq)
+  }
+})
+
+//DOW ^DJI
+console.log('Get Index');
+this.stockService.getPrice("^DJI").subscribe(data => {
+
+  //Convert the data into a json Obj
+  // this.model.response = JSON.stringify(data).toString();
+  // let obj = JSON.parse(this.model.response);
+  let obj = JSON.parse(JSON.stringify(data).toString())
+
+  if(obj['data'] == ''){
+    this.showToastr("Please Try again")
+  }else{
+    this.dow = Math.floor(Number(obj['data'][0]['Close']));
+    console.log(this.dow)
+}
+})
+}
 
   async getData(stock:string) {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getData method of page");
     this.stockService.getInfo(stock).subscribe(data => {
-      this.model.response = JSON.stringify(data).toString();
-      let obj = JSON.parse(this.model.response);
 
+      //Convert the data into a json Obj
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
 
       if(obj['data'] == ''){
         this.showToastr("Please Try again")
@@ -72,8 +140,11 @@ export class PageComponent implements OnInit {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getPrice method of page");
     this.stockService.getPrice(stock).subscribe(data => {
-      this.model.response = JSON.stringify(data).toString();
-      let obj = JSON.parse(this.model.response);
+
+      //Convert the data into a json Obj
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+      let obj = JSON.parse(JSON.stringify(data).toString())
 
       if(obj['data'] == ''){
         this.showToastr("Please Try again")
@@ -90,9 +161,13 @@ export class PageComponent implements OnInit {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getFinancials method of page");
     this.stockService.getFinancials(stock).subscribe(data => {
-      this.model.response = JSON.stringify(data).toString();
-      let obj = JSON.parse(this.model.response);
-      console.log(obj)
+
+      //Convert the data into a json Obj
+      // this.model.response = JSON.stringify(data).toString();
+      // let obj = JSON.parse(this.model.response);
+
+      let obj = JSON.parse(JSON.stringify(data).toString())
+      // console.log(obj)
 
       if(obj['data'] == ''){
         this.showToastr("Please Try again")
@@ -104,8 +179,10 @@ export class PageComponent implements OnInit {
 
   async getEarnings(stock:string) {
     this.model.Ticker = stock
-    console.log('Change the Ticker to ',this.model.Ticker," In getEarnings method of page");
+    // console.log('Change the Ticker to ',this.model.Ticker," In getEarnings method of page");
     this.stockService.getEarnings(stock).subscribe(data => {
+
+      //Convert the data into a json Obj
       this.model.response = JSON.stringify(data).toString();
       let obj = JSON.parse(this.model.response);
       
@@ -126,6 +203,8 @@ export class PageComponent implements OnInit {
     this.model.Ticker = stock
     console.log('Change the Ticker to ',this.model.Ticker," In getPriceCustomDate method of page", stock , beginDate , endDate);
     this.stockService.getPriceCustomDate(stock,beginDate,endDate).subscribe(data => {
+
+      //Convert the data into a json Obj
       this.model.response = JSON.stringify(data).toString()
       let obj = JSON.parse(this.model.response);
 
@@ -157,8 +236,16 @@ export class PageComponent implements OnInit {
   // Better way to implement this? Every two creates a different chart
   //1: date/close
   //2: date/volume
+  //3: year/revenue
   buildCharts(){
-    this.chartService.buildChartArray(this.date,this.close,this.date,this.volume)
+    if(this.date[0] != null){
+      this.chartService.buildCloseChart(this.date,this.close)
+      this.chartService.buildVolumeChart(this.date,this.volume)
+    }
+
+    if(this.earningArray != null){
+      this.chartService.buildEarningsChart(this.earningArray)
+    }
     this.showChart = true
     // console.log("Create Chart")
   }
@@ -167,13 +254,6 @@ export class PageComponent implements OnInit {
     this.chartService.destroyCharts();
     this.showChart = false
   }
-
-  // async JsonParser(obj:Object){
-  //   console.log(typeof obj)
-
-  //   // console.log(jsonObj)
-  // }
-
 
   showToastr(msg:string){
     // this.toastr.success('This is the success toastr')

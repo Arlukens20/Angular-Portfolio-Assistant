@@ -44,3 +44,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+#Ignore any text file?
+# Need to protect keys.
+*.txt

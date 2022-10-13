@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartComponent } from './line-chart.component';
+import { CryptoComponent } from './crypto.component';
 
-describe('LineChartComponent', () => {
-  let component: ChartComponent;
-  let fixture: ComponentFixture<ChartComponent>;
+describe('CryptoComponent', () => {
+  let component: CryptoComponent;
+  let fixture: ComponentFixture<CryptoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartComponent ]
+      declarations: [ CryptoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ChartComponent);
+    fixture = TestBed.createComponent(CryptoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

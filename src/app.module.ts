@@ -6,26 +6,33 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
 import { MaterialModule } from './app/Components/material/material.module';
 import { PageComponent } from './app/Components/page/page.component';
-import { LineChartComponent } from './app/Components/line-chart/line-chart.component';
+import { ChartComponent } from './app/Components/line-chart/line-chart.component';
 import { IndexComponent } from './app/Components/index/index.component';
 import { PortfolioComponent } from './app/Components/portfolio/portfolio.component';
 import { AboutComponent } from './app/Components/about/about.component';
 import { MetricPageComponent } from './app/Components/metric-page/metric-page.component';
+import { PageNotFoundComponent } from './app/Components/page-not-found/page-not-found.component';
+import { ForexComponent } from './app/Components/forex/forex.component';
+import { CryptoComponent } from './app/Components/crypto/crypto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageComponent,
-    LineChartComponent,
+    ChartComponent,
     IndexComponent,
     PortfolioComponent,
     AboutComponent,
     MetricPageComponent,
+    PageNotFoundComponent,
+    ForexComponent,
+    CryptoComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +40,7 @@ import { MetricPageComponent } from './app/Components/metric-page/metric-page.co
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
+    MatSelectModule,
     HttpClientModule,
     NgbModule,
     FormsModule,
@@ -40,7 +48,7 @@ import { MetricPageComponent } from './app/Components/metric-page/metric-page.co
 			positionClass: 'toast-top-center',
 })
   ],
-  providers: [LineChartComponent],
+  providers: [ChartComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

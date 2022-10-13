@@ -1,0 +1,36 @@
+<!-- <div display = table-cell>
+    <label>Select Currency: </label>
+    <input type="text" name="cost" placeholder="Amount" #cost>
+  </div> -->
+
+  <div style="margin: 5%;">
+    <mat-form-field appearance="fill">
+      <mat-label>Currencies</mat-label>
+      <mat-select (selectionChange)="onChangeA($event)" >
+        <mat-option *ngFor="let currency of currencyList" [value]="currency "> {{currency}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div display = table-cell>
+        <label>Enter Currency Amount</label>
+        <input type="text" name="cost" placeholder="Amount" #cost>
+      </div>
+  </div>
+
+  <div style="margin: 5%;">
+    <mat-form-field appearance="fill">
+      <mat-label>Currencies</mat-label>
+      <mat-select (selectionChange)="onChangeB($event)" >
+        <mat-option *ngFor="let currency of currencyList" [value]="currency "> {{currency}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <div display = table-cell>
+        <label>Enter Currency Amount</label>
+        <input type="text" name="cost" placeholder="Amount" #cost>
+      </div> -->
+  </div>
+
+  <button class="btn btn-dark" type="button" (click)="getList()"> Get List</button>
+  <button class="btn btn-dark" type="button" (click)="convertCurrency()">Convert</button>
+  <H1>Display information here!!</H1>

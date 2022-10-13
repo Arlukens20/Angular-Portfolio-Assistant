@@ -1,17 +1,32 @@
 <div class = "container">
-    <h1>Stock Finder</h1>
-     <div>
+    <h1>Stock Research</h1>
+    <div style="display:flex; flex-direction: row; justify-content: center;">
+        <div style="margin: 10px;">
+            <img src = "assets\images\SP.jpg" width="100" height="50">
+            <h4> SPY : {{this.spy}}</h4>
+        </div>
+        <div style="margin: 10px;">
+            <img src = "assets\images\DowLogo.png" width="100" height="50">
+            <h4> DOW : {{this.dow}}</h4>
+        </div>
+        <div style="margin: 10px;">
+            <img src = "assets\images\NASDAQ.png" width="100" height="50">
+            <h4> NASDAQ : {{this.nasdaq}}</h4>
+        </div>
+    </div>
+     <div style="margin: 15px;">
         <label for = "Ticker"> Ticker: </label>
         <input class="form-control" type="text" id="tickerA" name="tickerB" #ticker>
-        <h1> {{model.Ticker}}</h1>
+        <h1> Stock : {{model.Ticker}}</h1>
         <button class="btn btn-primary" type="button" (click)="getData(ticker.value)">Search Data</button>
         <button class="btn btn-primary" type="button" (click)="getPrice(ticker.value)">Search Price</button>
         <button class="btn btn-primary" type="button" (click)="getFinancials(ticker.value)">Search Financials</button>
         <button class="btn btn-primary" type="button" (click)="getEarnings(ticker.value)">Search Earnings</button>
-        <button class="btn btn-primary" type="button" (click)="showToastr('testing')">Show Toast</button>
+        <!-- <button class="btn btn-primary" type="button" (click)="showToastr('testing')">Show Toast</button> -->
+        <button class="btn btn-dark" type="button" (click)="sendAll(ticker.value)">Send All</button>
     </div>
 
-    <div>
+    <div style="margin: 15px;">
         <input class="form-control" type="date" id="from" #fromInput>
         <input class="form-control" type="date" id="thru" #thruInput>
         <button class="btn btn-primary" type="button" (click)="getPriceCustomDate(ticker.value,fromInput.value,thruInput.value)">Search Price Custom</button>
@@ -26,11 +41,13 @@
     </div>
  </div>
 
- <div *ngIf = 'model.response'>
+ <!-- <div *ngIf = 'model.response'>
     <h1>Response for Testing</h1>
     <p>{{model.response}}</p>
- </div>
+ </div> -->
 
+
+<div style="margin: 15px;">
  <!-- Values to display if get Info is searched-->
  <div *ngIf="model.longBusinessSummary">
     <h1>Summary</h1>
@@ -58,4 +75,5 @@
     <p>{{model.low}}</p>
     <h2>high:</h2>
     <p>{{model.high}}</p>
+</div>
 </div>

@@ -1,6 +1,6 @@
 /* Not Working want to set the width of the charts. */
 
-#MyChart{
+/* #MyChart{
     display: block;
     width:50%;
     height: 50%;
@@ -10,4 +10,10 @@
     display: block;
     width:50%;
     height: 50%;
-} 
+}  */
+
+div {
+    height: 200px;
+    width: 50%;
+    background-color: powderblue;
+}

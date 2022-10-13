@@ -11,17 +11,24 @@
         </li>
 
         <!-- Change these to a tags? How to do routing?? -->
-        <button class="btn btn-secondary" (click)="goToIndex()">Index</button>
-        <button class="btn btn-secondary" (click)="goToPage()">Page</button>
-        <button class="btn btn-secondary" (click)="goToPortfolio()">portfolio</button>
+        <a class="button" routerLink="/Index">Index</a>
+        <a class="button" routerLink="/Stock">Research</a>
+        <a class="button" routerLink="/Portfolio">Portfolio</a>
+        <a class="button" routerLink="/Forex">Forex</a>
+        <a class="button" routerLink="/Crypto">Crypto</a>
+        <!-- <button class="btn btn-secondary" (click)="goToIndex()">Index</button> -->
+        <!-- <button class="btn btn-secondary" (click)="goToPage()">Research</button> -->
+        <!-- <button class="btn btn-secondary" (click)="goToPortfolio()">portfolio</button> -->
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
           <ul class="dropdown-menu">
-           <li><button class="btn btn-secondary" (click)="goToMetrics()">Metrics</button></li>
-           <li><button class="btn btn-secondary" (click)="goToAbout()">About</button></li>
+            <li><a class="button" routerLink="/Metrics">Metrics</a></li>
+            <li><a class="button" routerLink="/About">About</a></li>
+           <!-- <li><button class="btn btn-secondary" (click)="goToMetrics()">Metrics</button></li> -->
+           <!-- <li><button class="btn btn-secondary" (click)="goToAbout()">About</button></li> -->
            <li>Items</li>  
           </ul>
         </li>
