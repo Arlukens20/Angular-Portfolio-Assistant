@@ -14,22 +14,35 @@
             <h4> NASDAQ : {{this.nasdaq}}</h4>
         </div>
     </div>
-     <div style="margin: 15px;">
-        <label for = "Ticker"> Ticker: </label>
-        <input class="form-control" type="text" id="tickerA" name="tickerB" #ticker>
-        <h1> Stock : {{model.Ticker}}</h1>
-        <button class="btn btn-primary" type="button" (click)="getData(ticker.value)">Search Data</button>
-        <button class="btn btn-primary" type="button" (click)="getPrice(ticker.value)">Search Price</button>
-        <button class="btn btn-primary" type="button" (click)="getFinancials(ticker.value)">Search Financials</button>
-        <button class="btn btn-primary" type="button" (click)="getEarnings(ticker.value)">Search Earnings</button>
-        <!-- <button class="btn btn-primary" type="button" (click)="showToastr('testing')">Show Toast</button> -->
-        <button class="btn btn-dark" type="button" (click)="sendAll(ticker.value)">Send All</button>
+    
+    <div style="margin: 15px;" class="centered">
+        <div class="columns">
+            <div>
+                <div class="form-floating mb-3 input-group-lg">
+                    <input class="form-control" type="text" id="tickerA" name="tickerB" placeholder="Text" #ticker >
+                    <label for="tickerA">Ticker</label>
+                </div>
+
+                <div class = 'd-grid gap-2 col-3'>
+                    <button class="btn btn-primary" type="button" (click)="getData(ticker.value)">Search Data</button>
+                    <button class="btn btn-primary" type="button" (click)="getPrice(ticker.value)">Search Price</button>
+                    <button class="btn btn-primary" type="button" (click)="getFinancials(ticker.value)">Search Financials</button>
+                    <button class="btn btn-primary" type="button" (click)="getEarnings(ticker.value)">Search Earnings</button>
+                    <!-- <button class="btn btn-primary" type="button" (click)="showToastr('testing')">Show Toast</button> -->
+                    <button class="btn btn-dark" type="button" (click)="sendAll(ticker.value)">Send All</button>
+                </div>
+            </div>
+
+            <div>
+                <input class="form-control" type="date" id="from" #fromInput>
+                <input class="form-control" type="date" id="thru" #thruInput>
+                <button class="btn btn-primary" type="button" (click)="getPriceCustomDate(ticker.value,fromInput.value,thruInput.value)">Search Price Custom</button>
+            </div>
+        </div>
     </div>
 
-    <div style="margin: 15px;">
-        <input class="form-control" type="date" id="from" #fromInput>
-        <input class="form-control" type="date" id="thru" #thruInput>
-        <button class="btn btn-primary" type="button" (click)="getPriceCustomDate(ticker.value,fromInput.value,thruInput.value)">Search Price Custom</button>
+    <div>
+        <h4> Stock : {{model.Ticker}}</h4>
     </div>
 
      <div *ngIf = 'chartModel.close'>
@@ -38,7 +51,6 @@
         <div *ngIf = showChart>
         <app-line-chart></app-line-chart>
      </div>
-    </div>
  </div>
 
  <!-- <div *ngIf = 'model.response'>

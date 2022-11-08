@@ -1,0 +1,16 @@
+input {
+    width: auto;
+}
+
+.centered{
+    text-align: center;
+     }
+/* .columns{
+     width: 50%;
+    } */
+.columns div{
+     width: auto; 
+     height: auto; 
+     float: left; 
+     margin:5px;
+    }
